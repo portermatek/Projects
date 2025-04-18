@@ -11,6 +11,7 @@ class HomeScreen extends StatelessWidget {
       "Neurologist",
       "Pediatrician",
     ];
+
     final doctors = [
       {"name": "Dr. K Smith", "specialty": "Cardiologist", "rating": "4.5"},
       {"name": "Dr. B Bonang", "specialty": "Dentist", "rating": "4.4"},
@@ -18,8 +19,10 @@ class HomeScreen extends StatelessWidget {
     ];
 
     return Scaffold(
+      backgroundColor: Colors.blue,
       appBar: AppBar(
         title: const Text("MediConnect"),
+        centerTitle: true,
         actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
       ),
       body: Padding(
@@ -28,28 +31,54 @@ class HomeScreen extends StatelessWidget {
           children: [
             const Text(
               "Top Doctors",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
             const SizedBox(height: 12),
             ...doctors.map(
               (doc) => Card(
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 6,
                 child: ListTile(
-                  title: Text(doc["name"]!),
-                  subtitle: Text(doc["specialty"]!),
+                  title: Text(
+                    doc["name"]!,
+                    style: const TextStyle(
+                      color: Colors.teal,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  subtitle: Text(
+                    doc["specialty"]!,
+                    style: const TextStyle(color: Colors.black87),
+                  ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(Icons.star, color: Colors.amber, size: 20),
-                      Text(doc["rating"]!),
+                      const SizedBox(width: 4),
+                      Text(
+                        doc["rating"]!,
+                        style: const TextStyle(color: Colors.black),
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 24),
             const Text(
               "Categories",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
             const SizedBox(height: 12),
             Wrap(
@@ -59,7 +88,10 @@ class HomeScreen extends StatelessWidget {
                       .map(
                         (c) => Chip(
                           label: Text(c),
-                          backgroundColor: Colors.blue.shade50,
+                          backgroundColor: Colors.white,
+                          labelStyle: const TextStyle(color: Colors.teal),
+                          elevation: 4,
+                          shadowColor: Colors.tealAccent,
                         ),
                       )
                       .toList(),

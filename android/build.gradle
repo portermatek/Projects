@@ -1,0 +1,20 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+// Set a custom build directory location
+gradle.projectsLoaded {
+    rootProject.buildDir = file('../../build')
+    rootProject.subprojects.each { subproject ->
+        subproject.buildDir = new File(rootProject.buildDir, subproject.name)
+        subproject.evaluationDependsOn(':app')
+    }
+}
+
+// Clean task
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
